@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="add_product.php">
+                <a class="nav-link" href="create_product.php">
                     <i class="fas fa-plus"></i> Add New Product
                 </a>
             </li>

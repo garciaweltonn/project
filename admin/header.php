@@ -13,9 +13,16 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <span class="navbar-brand">Admin</span>
+            <span class="navbar-brand mb-0 h1">Admin</span>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <div class="d-flex ms-auto">
+                <a href="logout.php" class="btn btn-outline-danger">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </a>
+            </div>
         </div>
     </nav>

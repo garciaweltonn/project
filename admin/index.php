@@ -32,7 +32,7 @@ $result = $conn->query($query);
     <?php include "sidemenu.php"; ?>
 
     <div class="container mt-3">
-        <h2 class="mb-4">Lista de Pedidos</h2>
+        <h2 class="mb-4">Order List</h2>
 
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -59,8 +59,7 @@ $result = $conn->query($query);
                         <td>
                             <a href="edit_order.php?id=<?= $row['order_id'] ?>"
                                 class="btn btn-warning btn-sm">Editar</a>
-                            <a href="delete_order.php?id=<?= $row['order_id'] ?>" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                            <button class="btn btn-danger btn-sm btn-delete" data-id="<?= $row['order_id'] ?>"> Excluir</button>
                         </td>
                     </tr>
                     <?php endwhile; ?>
@@ -84,6 +83,39 @@ $result = $conn->query($query);
         </nav>
     </div>
 </div>
+<script>
+document.querySelectorAll('.btn-delete').forEach(button => {
+    button.addEventListener('click', async () => {
+        const orderId = button.dataset.id;
+
+        if (confirm(`Tem certeza que deseja excluir o pedido #${orderId}?`)) {
+            try {
+                const response = await fetch('delete_order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `id=${orderId}`
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Remove a linha da tabela
+                    button.closest('tr').remove();
+                    alert(result.message);
+                } else {
+                    alert(result.message);
+                }
+
+            } catch (error) {
+                alert("Erro na requisição.");
+                console.error(error);
+            }
+        }
+    });
+});
+</script>
 
 </body>
 
